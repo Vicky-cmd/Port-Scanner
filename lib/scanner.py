@@ -13,6 +13,7 @@ open_port_count = 0
 start_port = 0
 end_port = 1001
 rep_fileName = "ip_report.txt"
+reports_folder = "../reports/"
 replace_existing_file = "N"
 output_file = open(rep_fileName, "a+")
 
@@ -92,13 +93,14 @@ print(bann())
 try:
 	append_to_fileName = 0
 	f_array = rep_fileName.split(".")
-	while os.path.exists(rep_fileName) and replace_existing_file.upper()=="N":
+	while os.path.exists(reports_folder + rep_fileName) and replace_existing_file.upper()=="N":
 		replace_existing_file = input("{} already Exists. Do you want to replace it? (Y/n) ".format(rep_fileName))
 		if replace_existing_file.upper() == "N":
 			append_to_fileName += 1
 			rep_fileName = f_array[0] + str(append_to_fileName) + "." + f_array[1]
 	else:
 		#print("IN ELSE BLOCK")
+		rep_fileName = reports_folder + rep_fileName
 		if replace_existing_file.upper() == "Y":
 			os.remove(rep_fileName)
 		output_file = open(rep_fileName, "a+")
